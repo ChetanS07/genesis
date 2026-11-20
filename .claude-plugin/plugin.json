@@ -1,5 +1,5 @@
 {
-  "name": "genesis-the-protocol",
+  "name": "genesis",
   "version": "0.3.0",
   "description": "Take a new project idea from interview to architecture files. Entry point is genesis-the-protocol, which chains crossfire, system design, tech stack, low-level design and handoff.",
   "author": {
