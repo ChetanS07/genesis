@@ -1,7 +1,9 @@
 ---
-name: crossfire-protocol
+name: crossfire
 description: Crossfire interview, round by round, until you and the user share one understanding. Use when a topic, plan, or project has open decisions you would otherwise guess, or when the user asks to be interviewed or grilled.
 ---
+
+Before the first round, fire [vocabulary-modelling](../vocabulary-modelling/SKILL.md) in the same turn, every time this skill starts. On its first firing it creates `<project root>/docs/project-manifest/vocabulary.md`, before your first round. It then stays active until this session ends: it watches every term the user uses and records each finalized term in that file. When it raises a term conflict, interrupt the round: put the conflict to the user on its own, wait for the answer, and let vocabulary-modelling record the settled term. Then re-read any answer from this round that used the term under its settled meaning, and resume the round. A sharpening or a scenario goes into the current round as one of the numbered questions, so the user still answers one set per round.
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
@@ -27,4 +29,4 @@ Each round the user answers reshapes the tree: settled decisions push the fronti
 
 Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed, and no vocabulary conflict left open. Do not act on it until the user confirms you have reached a shared understanding.

@@ -5,11 +5,24 @@ description: Actively build and sharpen the project's domain model while designi
 
 Build the project's domain model out loud, with the user, and keep `vocabulary.md` current as it takes shape. This is a live discipline, so run it for the whole session, not once at the end.
 
-`vocabulary.md` lives at `./genesis-protocol-docs/vocabulary.md`. It is a glossary and nothing else: no implementation details, no specs, no scratch notes, no decisions. Entry format and rules are in [vocabulary-format.md](vocabulary-format.md). Read it before the first write.
+## The file
+
+`vocabulary.md` lives at exactly one path: `<project root>/docs/project-manifest/vocabulary.md`. The project root is the git root, or the working directory when there is no repo. Every read and write uses this path, whatever directory the session is in.
+
+It is a glossary and nothing else: no implementation details, no specs, no scratch notes, no decisions. Entry format and rules are in [vocabulary-format.md](vocabulary-format.md). Read it before the first write.
+
+## Create
+
+The first time this skill fires in a session, before crossfire asks its first round, make sure the file exists:
+
+- When it is absent, create `docs/project-manifest/` at the project root if needed, then write `vocabulary.md` from the structure in [vocabulary-format.md](vocabulary-format.md): the context name and description taken from the user's project idea, and an empty `## Language` section.
+- When it already exists, Read it and build on it.
+
+Done when the file exists at that path and its contents are in context.
 
 ## Challenge
 
-Compare every term the user uses against `vocabulary.md`. On a conflict, say so immediately and ask which meaning holds.
+Compare every term the user uses against `vocabulary.md`. On a conflict, interrupt whatever round is in progress: say so immediately, ask which meaning holds as the only question, and settle it before any other question is asked. Record the settled term, then hand back to the round.
 
 > Your vocabulary defines "cancellation" as X, but you seem to mean Y. Which is it?
 
@@ -25,8 +38,6 @@ When relationships between concepts come up, invent a concrete scenario that pro
 
 ## Record
 
-The moment a term resolves, add or update its entry in `vocabulary.md`, before asking the next question. One entry per resolution, written as it happens. Resolved means the user confirmed the canonical term and its definition. Pick the best word and move the rejected ones under `_Avoid_`.
-
-If `vocabulary.md` doesn't exist yet, create it in `./genesis-protocol-docs/` from the structure in [vocabulary-format.md](vocabulary-format.md).
+The moment a term is finalized, add or update its entry in `vocabulary.md`, before asking the next question. One entry per resolution, written as it happens, at every stage of the flow, not only during the first interview. Finalized means the user confirmed the canonical term and its definition. Pick the best word and move the rejected ones under `_Avoid_`.
 
 The session is done when every term the user confirmed is in `vocabulary.md` and no conflict raised during the session is still open.
