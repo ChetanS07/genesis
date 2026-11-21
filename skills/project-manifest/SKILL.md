@@ -111,7 +111,7 @@ Fill the format as follows:
 
 - **Status line:** `ready-for-agent` when the Open Decisions table is empty, otherwise `draft`.
 - **Title:** the project name from the crossfire answers, `v1`, and a one-line description of what the app does.
-- **Header line:** point `Terms:` at `VOCABULARY.md` at the project root and `Decisions:` at the Decisions section of `system-design.md`, both as paths relative to this file, in place of `GLOSSARY.md` and `docs/adr/`. `Last updated` is today's date.
+- **Header line:** point `Terms:` at `VOCABULARY.md` at the project root and `Decisions:` at the Decisions section of `system-design.md` (in place of `docs/adr/`), both as paths relative to this file. `Last updated` is today's date.
 - **Problem Statement** and **Solution:** from the crossfire answers on purpose, users, and the problem. The Solution names no technology.
 - **User Stories:** one story per capability a user has, drawn from the functional requirements and the journeys in `system-design.md`, grouped by actor, numbered across the whole document. Use the actors named in the crossfire answers and the terms from `VOCABULARY.md`. Every functional requirement is covered by at least one story, and every failure path in a journey that the user sees is covered by a story or a rule.
 - **Implementation Decisions:**

@@ -1,7 +1,7 @@
 Status: draft | ready-for-agent
 # <App> v1: <one-line description>
 
-Terms: GLOSSARY.md · Decisions: docs/adr/ · Last updated: <date>
+Terms: VOCABULARY.md · Decisions: docs/adr/ · Last updated: <date>
 
 ## Problem Statement
 Who has the problem, what happens today, why that hurts. 1 paragraph.
