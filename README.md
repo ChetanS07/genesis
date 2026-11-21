@@ -70,7 +70,7 @@ skills/
 ├── system-synthesis/
 ├── stack-synthesis/
 ├── ll-design-synthesis/
-├── project-manifest/       # includes references/app-spec-format.md
+├── project-manifest/       # references/ holds one format file per output
 └── help-me/
 ```
 
