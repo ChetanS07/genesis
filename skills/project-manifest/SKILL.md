@@ -7,7 +7,7 @@ description: Handoff of the approved architecture into files. Fired by genesis w
 
 Turn the approved system design, tech stack, low-level design, and crossfire Q&A in context into three files: `system-design.md`, `tech-stack-and-low-level-design.md`, and `architecture-overview.html`. Write them for a reader who never saw this conversation and has to build from them.
 
-These three files are the whole output. `vocabulary.md` belongs to [vocabulary-modelling](../vocabulary-modelling/SKILL.md), which keeps it at `<project root>/docs/project-manifest/vocabulary.md`: read it from there for definitions and checks, and leave writing and delivering it to that skill.
+These three files are the whole output. `VOCABULARY.md` belongs to [vocabulary-modelling](../vocabulary-modelling/SKILL.md), which keeps it at `<project root>/VOCABULARY.md`: read it from there for definitions and checks, and leave writing and delivering it to that skill.
 
 ## 1. Gather context
 
@@ -53,7 +53,7 @@ Sections, in order:
 1. Project: name, purpose, users, taken from the crossfire answers.
 2. Requirements: functional, non-functional, and constraints (budget, expected users, compliance, timeline).
 3. Architecture: each component with its responsibility, owned data, and dependencies, plus a Mermaid diagram of components and flows.
-4. Entities and relationships: a table of every entity with its owning component, key attributes, and a one-line definition taken from `vocabulary.md`. Then a table of every relationship with both entities, its cardinality, and whether it crosses a component boundary. Then a Mermaid `erDiagram` of the entities and relationships.
+4. Entities and relationships: a table of every entity with its owning component, key attributes, and a one-line definition taken from `VOCABULARY.md`. Then a table of every relationship with both entities, its cardinality, and whether it crosses a component boundary. Then a Mermaid `erDiagram` of the entities and relationships.
 5. Journeys: each main journey step by step through the components, failure paths included.
 6. Integrations: every external system and what crosses the boundary.
 7. Decisions: each with its reason and the crossfire answer behind it.
@@ -102,9 +102,9 @@ Run a script that:
 - finds every entity name from `system-design.md` in `tech-stack-and-low-level-design.md` and the HTML
 - finds every relationship from `system-design.md` in the HTML with the same two entities and the same cardinality
 - finds every table or collection name from `tech-stack-and-low-level-design.md` in the HTML, under the component that owns it
-- finds every entity name from `system-design.md` as an entry in `vocabulary.md` (one direction only: vocabulary terms that are not entities are expected and pass)
+- finds every entity name from `system-design.md` as an entry in `VOCABULARY.md` (one direction only: vocabulary terms that are not entities are expected and pass)
 
-Fix each mismatch at its source, rebuild what depends on it, and run the script again. When an entity has no `vocabulary.md` entry, fire [vocabulary-modelling](../vocabulary-modelling/SKILL.md) to settle and record the term with the user; when the settled name differs from the design's, carry it back into the three files.
+Fix each mismatch at its source, rebuild what depends on it, and run the script again. When an entity has no `VOCABULARY.md` entry, fire [vocabulary-modelling](../vocabulary-modelling/SKILL.md) to settle and record the term with the user; when the settled name differs from the design's, carry it back into the three files.
 
 Done when the script reports zero mismatches.
 

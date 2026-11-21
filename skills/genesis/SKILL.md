@@ -11,7 +11,7 @@ The orchestrator. Take the user's project idea and run every stage in order, eac
 
 | # | Stage | Output it leaves in context | Ends when |
 | --- | --- | --- | --- |
-| 1 | [crossfire](../crossfire/SKILL.md) | the crossfire Q&A, and `<project root>/docs/project-manifest/vocabulary.md`, created by vocabulary-modelling before the first round and updated each time a term is finalized | the user confirms a shared understanding |
+| 1 | [crossfire](../crossfire/SKILL.md) | the crossfire Q&A, and `<project root>/VOCABULARY.md`, created by vocabulary-modelling before the first round and updated each time a term is finalized | the user confirms a shared understanding |
 | 2 | [system-synthesis](../system-synthesis/SKILL.md) | the approved system design | an explicit yes to the latest design |
 | 3 | [stack-synthesis](../stack-synthesis/SKILL.md) | the section headed "Approved tech stack" | an explicit yes, restated under that heading |
 | 4 | [ll-design-synthesis](../ll-design-synthesis/SKILL.md) | the section headed "Approved low-level design" | an explicit yes, restated under that heading |

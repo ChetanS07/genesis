@@ -23,7 +23,7 @@ Build the design from the answers. It holds:
 
 Name components by role ("job queue", "auth service"). stack-synthesis chooses the products.
 
-Done when every crossfire answer appears in the design or is listed as deliberately left out with a reason, and every component traces to an answer. Every entity has exactly one owner, and every relationship names both entities and its cardinality. Entity names match the terms in `vocabulary.md`.
+Done when every crossfire answer appears in the design or is listed as deliberately left out with a reason, and every component traces to an answer. Every entity has exactly one owner, and every relationship names both entities and its cardinality. Entity names match the terms in `VOCABULARY.md`.
 
 Every relationship and its cardinality traces to a crossfire answer. Before presenting the design, collect the relationships that trace to no answer and fire [crossfire](../crossfire/SKILL.md) on them as one round, each asked as a concrete scenario with names and numbers. A relationship goes under assumptions, marked as yours, only when the user declines to settle it in that round.
 
