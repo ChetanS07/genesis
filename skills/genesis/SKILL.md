@@ -45,7 +45,7 @@ Done when stage 4 has ended with "Approved low-level design" restated in context
 
 ## 4. Exit or create
 
-Ask exactly: "Exit, or create the artifacts (system design file, tech stack with low-level design file, one HTML file combining both)? Reply with one word: exit or create."
+Ask exactly: "Exit, or create the artifacts (system design file, tech stack with low-level design file, an app spec sheet, one HTML file combining both, a human-only roadmap)? Reply with one word: exit or create."
 
 Any reply other than a clear "exit" or "create", such as a partial selection or "maybe", gets the same question again.
 

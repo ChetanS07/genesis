@@ -24,7 +24,7 @@ Every skill except help-me can be fired by the agent, and you can type any of th
 | system-synthesis | genesis, or you | Builds a system design from the crossfire answers | You say an explicit yes to the latest design |
 | stack-synthesis | genesis, or you | Picks one product per component, split into at most 3 phases with the MVP first | You say an explicit yes to the latest stack |
 | ll-design-synthesis | genesis, or you | Designs each component in detail and offers three vendors per service need (Starter, Growth, Scale) with cited, dated prices | You approve the latest low-level design |
-| project-manifest | genesis on "create", or you | Writes the approved work into three files | You can open all three |
+| project-manifest | genesis on "create", or you | Writes the approved work into five files | You can open all five |
 | help-me | you only | This reference | Your question is answered |
 
 ## Starting
@@ -43,7 +43,7 @@ The same approval rule holds at every agree step in the flow: a yes with a cavea
 
 Once you approve the low-level design and its vendor picks, the agent restates the approved version under the heading "Approved low-level design", with the component entries, vendor picks, monthly totals, and assumptions. Genesis then asks you to reply with one word:
 
-- **create**: it fires project-manifest, which writes the three files from everything in the conversation.
+- **create**: it fires project-manifest, which writes the five files from everything in the conversation.
 - **exit**: the flow ends and everything stays in the conversation. Type `/genesis` later to get the same question again.
 
 Any other reply, such as "maybe", gets the same question again.
@@ -53,7 +53,7 @@ Any other reply, such as "maybe", gets the same question again.
 Two skills write files, each owning its own:
 
 - **vocabulary-modelling** owns `VOCABULARY.md`: always at `VOCABULARY.md` in the project root, created at the start and kept current through every stage. It is never sent as an attachment; it stays at that path in every mode.
-- **project-manifest** owns three files, written on "create": `system-design.md`, `tech-stack-and-low-level-design.md`, and `architecture-overview.html`. In Claude Code they land in `docs/project-manifest/` at the project root. In chat the two markdown files arrive as attachments and the HTML is rendered. The HTML shows the full data model: the entity diagram with entity and relationship tables (owner, key attributes, cardinality), and under each component its tables or collections with keys, indexes, and references. Before delivery, a check script confirms that every entity, relationship, table, vendor, and total in the HTML matches the markdown files. It reads `VOCABULARY.md` for entity definitions and checks, but never creates, changes, or delivers it.
+- **project-manifest** owns five files, written on "create": `system-design.md`, `tech-stack-and-low-level-design.md`, `app-spec.md`, `architecture-overview.html`, and `roadmap.md`. In Claude Code they land in `docs/project-manifest/` at the project root. In chat the markdown files arrive as attachments and the HTML is rendered. `app-spec.md` is the spec sheet for the app: every feature as numbered user stories, with the rules, permissions, interfaces, and notifications behind them, and which phase delivers each. `roadmap.md` is for you, not for agents: it covers the project, each phase with what it delivers, when it is done, and when to move on, the MVP features and done criteria, and what you must set up by hand between phases. The HTML shows the full data model: the entity diagram with entity and relationship tables (owner, key attributes, cardinality), and under each component its tables or collections with keys, indexes, and references. Before delivery, a check script confirms that every entity, relationship, table, vendor, and total in the HTML matches the markdown files. It reads `VOCABULARY.md` for entity definitions and checks, but never creates, changes, or delivers it.
 
 Any detail the session never settled is written as "Not decided in this session", so a reader sees the gap.
 

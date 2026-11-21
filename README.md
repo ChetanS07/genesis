@@ -47,14 +47,16 @@ Without a sentence, genesis asks "What are you building?" first.
 
 ## Output
 
-The project root is the git root, or the working directory when there is no repo. `VOCABULARY.md` sits directly at the project root and is owned by vocabulary-modelling: created there at the start of the interview, updated through the whole flow, and never attached or sent in any mode. The other three are owned by project-manifest and written to `docs/project-manifest/` on `create`; project-manifest only reads `VOCABULARY.md`:
+The project root is the git root, or the working directory when there is no repo. `VOCABULARY.md` sits directly at the project root and is owned by vocabulary-modelling: created there at the start of the interview, updated through the whole flow, and never attached or sent in any mode. The other five are owned by project-manifest and written to `docs/project-manifest/` on `create`; project-manifest only reads `VOCABULARY.md`:
 
 | File | Contents |
 | --- | --- |
 | `VOCABULARY.md` | The project glossary. Created when crossfire first starts vocabulary-modelling, then updated each time you finalize a term, at any stage |
 | `system-design.md` | The approved system design, including the entity-relationship model: an entity table, a relationship table with cardinality, and a Mermaid ER diagram |
 | `tech-stack-and-low-level-design.md` | The phased stack, low-level design (including each component's tables or collections, keys, indexes, and references), vendor picks, and costs |
+| `app-spec.md` | The spec sheet for the app, in the format of `skills/project-manifest/references/app-spec-format.md`: problem and solution, numbered user stories by actor, the rules, permissions, interfaces, notifications, and data model behind each feature, delivery phases by story, testing decisions, out of scope, and open decisions |
 | `architecture-overview.html` | A single-page overview of the architecture. Shows the full data model: the entity diagram with entity and relationship tables, and each component's tables, keys, indexes, and references. A check script confirms that its entities, relationships, tables, vendors, and totals match the two markdown files |
+| `roadmap.md` | For humans only; agents do not read it. The project and the problem it solves, each phase with what it delivers, its done criteria, and when to move on, the MVP features and when the MVP is done, and what a human must set up between phases |
 
 Any decision you declined to make is written as "Not decided in this session", so the gap stays visible.
 
@@ -68,7 +70,7 @@ skills/
 ├── system-synthesis/
 ├── stack-synthesis/
 ├── ll-design-synthesis/
-├── project-manifest/
+├── project-manifest/       # includes references/app-spec-format.md
 └── help-me/
 ```
 
