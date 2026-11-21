@@ -13,7 +13,7 @@ The orchestrator. Take the user's project idea and run every stage in order, eac
 | --- | --- | --- | --- |
 | 1 | [crossfire](../crossfire/SKILL.md) | the crossfire Q&A, and `<project root>/docs/project-manifest/vocabulary.md`, created by vocabulary-modelling before the first round and updated each time a term is finalized | the user confirms a shared understanding |
 | 2 | [system-synthesis](../system-synthesis/SKILL.md) | the approved system design | an explicit yes to the latest design |
-| 3 | [stack-synthesis](../stack-synthesis/SKILL.md) | the approved phased tech stack | an explicit yes to the latest stack |
+| 3 | [stack-synthesis](../stack-synthesis/SKILL.md) | the section headed "Approved tech stack" | an explicit yes, restated under that heading |
 | 4 | [ll-design-synthesis](../ll-design-synthesis/SKILL.md) | the section headed "Approved low-level design" | an explicit yes, restated under that heading |
 | 5 | [project-manifest](../project-manifest/SKILL.md) | the written files | the user can open every file |
 
@@ -49,7 +49,7 @@ Ask exactly: "Exit, or create the artifacts (system design file, tech stack with
 
 Any reply other than a clear "exit" or "create", such as a partial selection or "maybe", gets the same question again.
 
-- **create:** fire [project-manifest](../project-manifest/SKILL.md), passing everything in context in full: every crossfire question and answer from the first run onward, the gap-fill rounds, the approved system design, the tech stack decisions, and the approved low-level design.
+- **create:** fire [project-manifest](../project-manifest/SKILL.md), passing everything in context in full: every crossfire question and answer from the first run onward, the gap-fill rounds, the approved system design, the approved tech stack, and the approved low-level design.
 - **exit:** end with all of that left in the conversation. Tell the user that typing `/genesis` later resumes at file writing.
 
 Done when the user has replied "exit" or "create" and the matching branch has run to its end.

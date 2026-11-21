@@ -15,7 +15,7 @@ Collect from the conversation:
 
 - every crossfire question and answer, gap-fill rounds included
 - the approved system design
-- the tech stack decisions
+- the section headed "Approved tech stack", with its phases, picks, assumptions, and risks
 - the section headed "Approved low-level design", with its vendor tables, picks, monthly totals, and assumptions
 
 When one is missing, fire [genesis](../genesis/SKILL.md) and end this skill; genesis runs the missing stages and asks before writing files. A design the user has not approved counts as missing.
@@ -66,15 +66,16 @@ Done when every component, entity, relationship, journey, requirement, constrain
 
 Sections, in order:
 
-1. Tech stack: one row per layer (frontend, backend, data, infrastructure, tooling, and any other layer decided) with the choice, its version when settled, the reason, and the alternatives considered.
-2. Low-level design: one entry per component, named exactly as in `system-design.md`, holding interfaces, data, behavior, runtime, and observability as approved.
-3. Vendors and pricing: for each service need, a table with Starter, Growth, and Scale options. Each option shows the vendor, monthly cost at expected usage, the limit that forces the next tier, the cost of leaving, the source URL, and the date of the figure. Below the table, the pick with its reason and the crossfire answer behind it.
-4. Monthly totals: the picked mix and each tier taken whole, with the arithmetic shown.
-5. Assumptions.
+1. Phases: each phase with its components, expected users, and monthly budget, MVP first.
+2. Tech stack: one row per technology pick, grouped by phase, with the layer (frontend, backend, data, infrastructure, tooling, or any other layer decided), the technology, its hosting model, its version when settled, the reason, the alternative considered, and the lock-in it brings.
+3. Low-level design: first the service marks, each with its capability, phase, and why buying beats building; then one entry per component, named exactly as in `system-design.md`, holding its phase, whether it is built or bought, interfaces, data, behavior, runtime, and observability as approved.
+4. Vendors and pricing: for each service need, the stack pick or service mark it serves and a table with Starter, Growth, and Scale options. Each option shows the vendor and plan, monthly cost at each phase's expected usage, the limit that forces the next tier, the cost of leaving, the source URL, and the date of the figure. Below the table, the pick for each phase with its reason and the crossfire answer behind it.
+5. Monthly totals: each phase's picked mix against that phase's budget, and each tier taken whole, with the arithmetic shown.
+6. Assumptions and risks, from both the stack and the low-level design.
 
 Copy figures unchanged from the approved low-level design, and keep the date each was gathered, so the reader can judge how stale it is.
 
-Done when every layer, component, and service need is present, and every price carries its source and date.
+Done when every phase, pick, service mark, component, and service need is present, and every price carries its source and date.
 
 ## 6. Build architecture-overview.html
 
@@ -84,19 +85,19 @@ Four sections, in this order, behind a sticky section nav:
 
 1. **About**: one paragraph of three to five sentences on what the project is, who it serves, and what it does.
 2. **System design**: an inline SVG of the components and their flows, a component table, an inline SVG of the entities and relationships with their cardinality, an entity table (owning component, key attributes, one-line definition) and a relationship table (both entities, cardinality, whether it crosses a component boundary) copied from `system-design.md`, and a short line per journey.
-3. **Tech stack**: a table of layers, choices, and reasons.
-4. **Low-level design and pricing**: one collapsible entry per component, each showing its interfaces and its data: every table or collection it owns with keys, indexes, and constraints, and every reference to another entity (foreign key, join table, or embedded reference, and for cross-component references how consistency is kept), copied from `tech-stack-and-low-level-design.md`; then per service need a tier comparison with the picked option marked, then monthly totals for each tier and for the picked mix.
+3. **Tech stack**: the phases with their components, then a table of technology picks grouped by phase with layer, technology, hosting model, and reason.
+4. **Low-level design and pricing**: the service marks with capability and phase, then one collapsible entry per component, each showing whether it is built or bought, its interfaces and its data: every table or collection it owns with keys, indexes, and constraints, and every reference to another entity (foreign key, join table, or embedded reference, and for cross-component references how consistency is kept), copied from `tech-stack-and-low-level-design.md`; then per service need a tier comparison with the picked option marked, then monthly totals for each phase's picked mix and for each tier.
 
 One self-contained file: inline CSS and JS, no network resources, readable at phone width, light and dark through `prefers-color-scheme`, and clean when printed.
 
-Done when the four sections appear in order and every component name, entity, relationship, table, vendor, price, and total matches the markdown text exactly.
+Done when the four sections appear in order and every phase, component name, entity, relationship, table, vendor, price, and total matches the markdown text exactly.
 
 ## 7. Check
 
 Run a script that:
 
 - finds every monthly total and vendor name from `tech-stack-and-low-level-design.md` in the HTML
-- re-adds the totals from the per-need figures
+- re-adds each phase total from that phase's per-need figures
 - finds every component name from `system-design.md` in the other two files
 - finds every entity name from `system-design.md` in `tech-stack-and-low-level-design.md` and the HTML
 - finds every relationship from `system-design.md` in the HTML with the same two entities and the same cardinality

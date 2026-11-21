@@ -1,62 +1,72 @@
 ---
 name: stack-synthesis
-description: Phased tech stack for the final product, chosen from an approved system design. Fired by genesis, or use when a system design is in context and the user wants technology chosen.
+description: Tech stack choice, phased MVP-first, from an approved system design. Fired by genesis, or use when a system design is in context and the user wants technology chosen.
 ---
 
 # Stack synthesis
 
-Turn the approved system design and the crossfire answers in context into the tech stack of the final product, split into at most 3 phases with the MVP as phase 1. Agree it with the user, then hand control back. The stack lives in the conversation.
+Turn the approved system design and the crossfire answers in context into the tech stack of the final product, rolled out in 1 to 3 phases with the MVP as phase 1. Agree it with the user, restate it, then hand control back. The stack lives in the conversation.
+
+Two rules hold in every step:
+
+- **Gaps**: when a decision turns on a fact no answer supplies (team skills, hosting preference, budget, compliance), fire [crossfire](../crossfire/SKILL.md) on that gap, then resume. Whatever you still assume goes under assumptions, marked as yours.
+- **Ripple**: every change carries its consequences into the same revision. Recheck everything it touches before showing the result.
 
 ## 1. Fix the phases
 
 Read the design and the crossfire Q&A in context. If no approved design is there, fire [genesis](../genesis/SKILL.md) and end this skill; genesis runs the missing stages first and then returns here.
 
-Ask the user what must ship in the MVP and what can wait. Fire [crossfire](../crossfire/SKILL.md) for this, covering only what the context leaves unanswered.
+Phase 1 is the MVP: the smallest set of components that serves the core user journeys end to end. Later phases add components and capacity. Phase 1 always meets the **floor**: every core journey runs on phase 1 components alone, and phase 1 holds auth and observability, since both are cheap early and painful to retrofit. When the design lacks auth or observability, add it to phase 1 and mark it as yours.
 
-Cut the design into 1 to 3 phases. Phase 1 is the MVP: the smallest set of components that serves the core user journeys end to end. Later phases add components and capacity.
+Draft the phases yourself, then fire [crossfire](../crossfire/SKILL.md) with the draft as the recommended answer. Show every component under its proposed phase with a one-line reason: the journey it serves, why it can wait, or the earlier answer that already placed it. Ask in the same round for the expected users and the monthly budget of each phase, unless the context already holds them. The user accepts with a plain yes or names components to move.
 
-Phase 1 always carries auth and observability, since both are cheap early and painful to retrofit. When the design lacks either component, add it to phase 1 and mark it as yours.
+Apply each move with its ripple: a component moved later takes the journeys that need it, and a component moved into phase 1 brings the components it depends on. When a move breaks the floor, say so once and ask again. Show the revised phases with the moves marked until the user accepts.
 
-Done when every component in the design sits in exactly one phase, every core journey the user named for the MVP runs on phase 1 components alone, and phase 1 holds auth and observability.
+Done when every component sits in exactly one phase, phase 1 meets the floor, every phase has its expected users and budget (or an assumption marked as yours), and the user has accepted the latest phases.
 
 ## 2. Draft the stack
 
-Pick one product for each component and boundary in the design, for the final product. Cover the layers the design has a component for: language and framework, data stores, hosting and deployment, auth, messaging, observability, CI, and every third-party service the design names.
+This step selects **technologies**: software the project runs, itself or through a vendor that hosts it (Postgres, Redis, Next.js). Pick one for each layer the design has a component for: language and framework, data stores, hosting and deployment, messaging, observability, CI. Add a technology for a component only when its job is the product's own domain logic. A component with a generic capability (auth, payments, email, search) and every third-party service the design names are left to ll-design-synthesis, which decides whether to build or buy each. Pick for the final product: phase 1 uses a subset and each later phase adds to it, building on what earlier phases shipped.
 
-Every pick is a final-stack product. Phase 1 uses a subset of them and later phases add the rest, so no phase replaces what an earlier phase shipped.
+Each pick carries six lines:
 
-Each pick carries five lines:
-
-- The product
+- The technology
+- Its hosting model, managed or self-hosted; ll-design-synthesis picks the vendor that runs it under that model
 - The phase it enters
 - The component or crossfire answer that drove it
 - The strongest rejected alternative and why it lost
-- The cost it brings (lock-in, ops burden, learning curve)
+- The lock-in it brings (what replacing the technology would take), plus its ops burden and learning curve
 
-Choose against the user's stated constraints: team skills, timeline, scale, compliance, existing systems. Choose _boring_ technology unless an answer demands otherwise, and use fewer products over more. Look up current version and maintenance status for each pick, since memory goes stale.
+Read the design's shape, beyond its component list:
 
-Name products and technologies. Vendors, tiers, and pricing belong to ll-design-synthesis, which selects a vendor for each service in the stack. Raise budget only when a pick turns on it (a managed service versus self-hosting, say).
+- **Data stores** follow the entities and relationships: many-to-many relationships, cross-component references, and the consistency each reference needs decide between relational, document, and key-value storage. Every relationship must be servable by the store picked for its owning component.
+- **Messaging** follows the data flow: each asynchronous hop between components needs a queue or broker; a design of synchronous calls alone needs none.
+- **Risks**: each risk in the design is answered by a pick, or carried into the stack's risks.
 
-Done when every component and boundary has a pick traced to an answer, every pick carries a phase, and every crossfire constraint shapes at least one pick or is listed as not affecting the stack.
+Choose against the user's stated constraints: team skills, timeline, scale, budget per phase, compliance, existing systems. Budget rules on hosting models, phase 1 above all: a managed hosting model in phase 1 must fit the phase 1 budget. Choose _boring_ technology unless an answer demands otherwise, and fewer technologies over more. Look up each pick's current version and maintenance status; memory goes stale.
 
-When a pick turns on a fact no answer supplies (team skills, hosting preference, compliance), fire [crossfire](../crossfire/SKILL.md) on that gap, then resume. Whatever you still assume goes under assumptions, marked as yours.
+Name technologies and hosting models; ll-design-synthesis decides build or buy and chooses, plans, and prices every vendor.
+
+Done when every layer the design has a component for, and every domain-logic component needing its own technology, has a pick traced to an answer, every pick carries its six lines, every relationship in the design is servable by its owner's store, every design risk is answered or carried, and every crossfire constraint shapes at least one pick or is listed as not affecting the stack.
 
 ## 3. Agree
 
 Present the stack grouped by phase, MVP first, then ask exactly: "Is any change needed, or does this stack serve your project well?"
 
-When the user asks for changes, apply every one and recheck what each touches (a new database moves the ORM, the hosting, the backup plan, and possibly the phase split). Show the revised stack with the changes marked, then ask exactly: "Does this serve your project well?" Repeat this round until the user approves.
+Apply every requested change with its ripple (a new database moves the ORM, the hosting, the backup plan, and possibly the phases). Show the revised stack with the changes marked, then ask exactly: "Does this serve your project well?" Repeat until the user approves. A yes with a caveat, or "mostly", is a change request.
 
-A yes with a caveat, or "mostly", is a change request.
+Settle each change by what it collides with:
 
-When a requested change carries a real downside, state it once with the alternative you would pick. The user's reply settles it: a new reason reopens the pick, a plain reaffirmation keeps the user's choice and the downside moves to risks.
-
-A change that contradicts a crossfire answer goes back to the user as a conflict to settle. A change the design cannot support means the design needs revising: say so and fire [system-synthesis](../system-synthesis/SKILL.md); it returns here once the revised design is approved, and the stack is rechecked against it.
+- **A real downside**: state it once with the alternative you would pick. A new reason from the user reopens the pick; a plain reaffirmation keeps their choice and moves the downside to risks.
+- **A crossfire answer**: put the conflict to the user to settle.
+- **The design**: the design needs revising. Say so and fire [system-synthesis](../system-synthesis/SKILL.md); it returns here once the revised design is approved, and the stack is rechecked against it.
 
 Done when the user's latest message is an explicit yes to the latest version and no objection of yours is still open.
 
-## 4. Hand back
+## 4. Restate and hand back
 
-Return control to the skill that fired this one, with the approved stack and its phases in context. When the user fired it directly, fire [genesis](../genesis/SKILL.md), which continues the flow at the next stage.
+Restate the approved version once, under the heading "Approved tech stack": the phases with their components, expected users, and budget; every pick with its six lines, grouped by phase; the assumptions; and the risks.
 
-Done when control is with the firing skill or genesis.
+Then return control to the skill that fired this one. When the user fired it directly, fire [genesis](../genesis/SKILL.md), which continues the flow at the next stage.
+
+Done when the restatement is in context and control is with the firing skill or genesis.
